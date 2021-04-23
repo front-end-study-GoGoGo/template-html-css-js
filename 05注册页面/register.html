@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="register.css">
+</head>
+
+
+<body>
+    <div id="loginDiv">
+        <form>
+            <h1>美食ya注册页面</h1>
+            <p>用户名:<input id="userNname" name="userName" type="text" autofocus required><label id="name_trip"></label>
+            </p>
+
+            <p>用户密码:<input id="password" type="password" required><label id="password_trip"></label></p>
+
+            <p>确认密码:<input id="surePassword" type="password" required><label id="surePassword_trip"></label></p>
+
+            <p>
+                电子邮件:
+                <input id="email" type="email" required>
+                <label id="emil_trip"></label>
+            </p>
+
+            <p style="text-align: center;">
+                <input type="submit" class="button" onclick="submitT()" value="提交">
+                <input type="reset" class="button" onclick="myFunctionReset()" value="重置">
+            </p>
+        </form>
+    </div>
+    <script src="lib/jquery.min.js"></script>
+    <script src="register.js"></script>
+</body>
+
+</html>
