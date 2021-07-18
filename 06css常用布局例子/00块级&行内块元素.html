@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>00块级&行内块元素</title>
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    .bloak {
+      display: block;
+      width: 200px;
+      height: 50px;
+      border: 5px solid red;
+    }
+
+    .inline {
+      display: inline;
+      /* 设置宽度无效，因为是行内元素 */
+      width: 400px;
+      border: 10px solid yellowgreen;
+    }
+
+    .inline-bloak {
+      display: inline-block;
+      /* 设置宽度无效，因为是行内元素 */
+      width: 400px;
+      border: 10px solid rgb(148, 200, 224);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bloak">块级元素</div>
+  <span class="inline">行内元素</span>
+  <span class="inline-bloak">行内块元素</span>
+  <a href="">链接</a>
+</body>
+
+</html>

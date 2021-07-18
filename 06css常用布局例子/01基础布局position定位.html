@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>position定位使用</title>
+    <style>
+        div.static {
+            position: static;
+            border: 3px solid #73AD21;
+            top: 50px;
+            /*演示：这句话不起作用，可删去*/
+            left: 10px;
+            /*演示：这句话不起作用，可删去*/
+        }
+
+        div.fixed_1 {
+            position: fixed;
+            border: 3px solid #111111;
+            width: 200px;
+            height: 60px;
+            top: 300px;
+            left: 50px;
+        }
+
+        div.fixed_2 {
+            position: fixed;
+            border: 3px solid #44f895;
+            width: 200px;
+            height: 60px;
+            top: 300px;
+            left: 260px;
+        }
+
+        div.fixed_3 {
+            position: fixed;
+            border: 3px solid #7a5e5e;
+            background-color: #ebaaaa;
+            width: 200px;
+            height: 60px;
+            top: 310px;
+            left: 360px;
+        }
+
+        div.relative {
+            position: relative;
+            border: 3px solid #9cf0c2;
+            width: 200px;
+            height: 60px;
+        }
+
+        div.absolute {
+            position: absolute;
+            background-color: #9cf0c2;
+            border: #29c9c9;
+            width: 150px;
+            height: 30px;
+            top: 25px;
+        }
+
+        div.sticky {
+            /* 兼容Safari  */
+            position: -webkit-sticky; 
+            position: sticky;
+            top: 20px;
+            /* 到顶部20px位置不动 */
+            background-color: #29c9c9;
+            border: 2px solid #73AD21;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="height: 2000px;">
+        <!-- static定位 -->
+        <div class="static">这个是static定位</div>
+        <!-- fixed 定位 -->
+        <div class="fixed_1">fixed方块1</div>
+        <div class="fixed_2">fixed方块2</div>
+        <div class="fixed_3">fixed方块3</div>
+        <!-- relative定位 -->
+        <div class="relative">
+            relative定位
+            <!-- absolute定位 -->
+            <div class="absolute">absolute定位</div>
+        </div>
+        <!-- sticky定位 -->
+        <div class="sticky">这个是sticky定位</div>
+
+    </div>
+</body>
+
+</html>
