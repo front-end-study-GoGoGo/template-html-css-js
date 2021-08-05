@@ -60,7 +60,7 @@
 
         div.sticky {
             /* 兼容Safari  */
-            position: -webkit-sticky; 
+            position: -webkit-sticky;
             position: sticky;
             top: 20px;
             /* 到顶部20px位置不动 */
@@ -89,5 +89,41 @@
 
     </div>
 </body>
+<script>
+    const jsono = [{
+        "姓名": "张三",
+        "年龄": "30",
+        "性别": "男"
+    }, {
+        "姓名": "李四",
+        "年龄": "40",
+        "性别": "女"
+    }, {
+        "姓名": "王五",
+        "年龄": "50",
+        "性别": "男"
+    }];
+    let tmpDown; // 导出的二进制对象
+    // 根据json数据，获取excel的第一行(例如:姓名、年龄、性别)存至map
+    let tmpdata = jsono[0];
+    jsono.unshift({});
+    console.log("jsono:", jsono);
+    let keyMap = []; // 获取keys
+    for (let k in tmpdata) {
+        console.log("k:", k);
+        keyMap.push(k);
+        jsono[0][k] = k;
+    }
+    console.log("jsono:", jsono);
+    tmpdata = [];
+    jsono.map((v, i) => keyMap.map((k, j) => Object.assign({}, {
+        v: v[k],
+        position: (j > 25 ? this.getCharCol(j) : String.fromCharCode(65 + j)) + (i + 1)
+
+    }))).reduce((prev, next) => prev.concat(next)).forEach((v, i) => tmpdata[v.position] = {
+        v: v.v
+    });
+    console.log(1111)
+</script>
 
 </html>
