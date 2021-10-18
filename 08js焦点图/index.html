@@ -1,0 +1,69 @@
+﻿<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>js焦点图片自动轮播切换代码</title>
+<link rel="stylesheet" href="lb.css">
+<script src="lb.js"></script>
+<script>
+window.onload = function () {
+  // 轮播选项
+  const options = {
+	id: 'lb-1',              // 轮播盒ID
+	speed: 600,              // 轮播速度(ms)
+	delay: 3000,             // 轮播延迟(ms)
+	direction: 'left',       // 图片滑动方向
+	moniterKeyEvent: true,   // 是否监听键盘事件
+	moniterTouchEvent: true  // 是否监听屏幕滑动事件
+  }
+  const lb = new Lb(options);
+  lb.start();
+}
+</script>
+</head>
+
+<body>
+<div class="lb-box" id="lb-1">
+<!-- 轮播内容 -->
+<div class="lb-content">
+  <div class="lb-item active">
+	<a href="#">
+	  <img src="images/t1.png" alt="picture loss">
+	  <span>Description 1</span>
+	</a>
+  </div>
+  <div class="lb-item">
+	<a href="#">
+	  <img src="images/t2.png" alt="picture loss">
+	  <span>Description 2</span>
+	</a>
+  </div>
+  <div class="lb-item">
+	<a href="#">
+	  <img src="images/t3.png" alt="picture loss">
+	  <span>Description 3</span>
+	</a>
+  </div>
+  <div class="lb-item">
+	<a href="#">
+	  <img src="images/t4.png" alt="picture loss">
+	  <span>Description 4</span>
+	</a>
+  </div>   
+</div>
+<!-- 轮播标志 -->
+<ol class="lb-sign">
+  <li class="active">1</li>
+  <li>2</li>
+  <li>3</li>
+  <li>4</li>
+</ol>
+<!-- 轮播控件 -->
+<div class="lb-ctrl left">＜</div>
+<div class="lb-ctrl right">＞</div>
+</div>
+
+</body>
+</html>
