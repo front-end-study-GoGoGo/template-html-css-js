@@ -8,8 +8,13 @@
     .flex-container {
       display: flex;
       flex-direction: row;
+      /*横向排列，正序，默认值*/
       flex-wrap: wrap;
-      background-color: DodgerBlue;
+      /*换行*/
+      max-width: 600px;
+      height: 200px;
+      margin: auto;
+      background-color: rgba(156, 240, 108, 0.301);
     }
 
     /* 选择父元素样式是 .flex-container 的所有 <div> 元素 */
@@ -17,11 +22,26 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: yellowgreen;
-      width: 100px;
-      height: 80px;
-      margin: 10px;
-      font-size: 30px;
+      width: 50px;
+      height: 50px;
+      /* margin: 10px; */
+      font-size: 22px;
+    }
+
+    .flex-container>div:nth-of-type(n) {
+      background-color: rgba(119, 232, 240, 0.788);
+    }
+
+    .flex-container>div:nth-of-type(2n) {
+      background-color: rgb(230, 178, 81);
+    }
+
+    .flex-container>div:nth-of-type(3n) {
+      background-color: rgba(118, 105, 233, 0.774);
+    }
+
+    .flex-container>div:nth-of-type(4n) {
+      background-color: rgb(214, 123, 199);
     }
   </style>
 </head>
