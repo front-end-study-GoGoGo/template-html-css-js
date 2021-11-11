@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>css写一个Tab标签</title>
+  <style>
+    #city div {
+      float: left;
+      width: 60px;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+    }
+
+    /*0、清除浮动*/
+    #city:after {
+      height: 0;
+      content: ' ';
+      clear: both;
+      display: block;
+
+    }
+
+    #bj {
+      border-top: 1px solid #000;
+      border-left: 1px solid #000;
+      border-bottom: 1px solid #000;
+    }
+
+    #sh {
+      border-top: 1px solid #000;
+      border-left: 1px solid;
+      border-bottom: 1px solid;
+    }
+
+    #tj {
+      border-top: 1px solid;
+      border-right: 1px solid;
+      border-bottom: 1px solid;
+      border-left: 1px solid;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="city">
+    <div id="bj">北京</div>
+    <div id="sh">上海</div>
+    <div id="tj">天津</div>
+  </div>
+  <div id="content">
+    数据
+  </div>
+</body>
+<script>
+  var city = document.getElementById('city');
+  var content = document.getElementById('content');
+  var obj = {
+    "北京": '北京<img src="1.png">',
+    "上海": '上海<img src="2.png">',
+    "天津": '天津<img src="3.png">'
+  };
+  var child = city.getElementsByTagName('div');
+  //事件委托
+  city.addEventListener('click', function (ev) {
+    var ev = ev || window.event;
+    var target = ev.target || ev.srcElement; //为了兼容IE
+    if (target.nodeName.toLowerCase() === 'div') {
+      for (let j = 0; j < child.length; j++) {
+        child[j].style.background = '#fff';
+      }
+      target.style.background = 'red';
+      for (var key in obj) {
+        if (target.innerText === key) {
+          content.innerHTML = obj[key];
+        }
+      }
+    }
+  }, true)
+</script>
+
+</html>
