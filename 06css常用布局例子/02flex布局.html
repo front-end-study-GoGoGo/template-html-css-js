@@ -9,9 +9,10 @@
       display: flex;
       flex-direction: row;
       /*横向排列，正序，默认值*/
-      flex-wrap: wrap;
+      align-items: center;
       /*换行*/
-      max-width: 600px;
+      /* max-width: 600px; */
+      min-width: 100px;
       height: 200px;
       margin: auto;
       background-color: rgba(156, 240, 108, 0.301);
@@ -22,7 +23,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 50px;
+      width: 150px;
       height: 50px;
       /* margin: 10px; */
       font-size: 22px;
@@ -38,6 +39,7 @@
 
     .flex-container>div:nth-of-type(3n) {
       background-color: rgba(118, 105, 233, 0.774);
+      align-self: flex-end;
     }
 
     .flex-container>div:nth-of-type(4n) {
@@ -53,14 +55,14 @@
     <div>3</div>
     <div>4</div>
     <div>5</div>
-    <div>6</div>
+    <!-- <div>6</div>
     <div>7</div>
     <div>8</div>
     <div>9</div>
     <div>10</div>
     <div>11</div>
     <div>12</div>
-    <div>13</div>
+    <div>13</div> -->
   </div>
 </body>
 
