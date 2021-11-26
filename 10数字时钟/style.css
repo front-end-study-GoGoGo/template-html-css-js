@@ -1,12 +1,15 @@
 html,
 body {
-  height: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   background: #0f3854;
   background: radial-gradient(ellipse at center, #0a2e38 0%, #000000 70%);
-  background-size: 100%;
+  background-size: 100vh;
 }
 
 p {
