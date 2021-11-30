@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dom节点</title>
+</head>
+
+<body>
+
+  <!-- 添加节点 -->
+  <div id="t1"></div>
+
+  <script type="text/javascript">
+    var d1 = document.createElement("div"); // 创建一个节点
+    d1.style.color = "blue"; // 设置一下颜色
+    d1.setAttribute("id", "d1"); // 设置一个属性
+    d1.innerText = "innerText"; // innerText会一次性替换所有内容
+    var tn1 = document.createTextNode(" CreateTextNode"); // createTextNode可以做动态添加
+    d1.appendChild(tn1); // 追加文本节点
+    var node = document.getElementById("t1").appendChild(d1); // 将d1节点追加到t1节点后
+
+    var b1 = document.createElement("div");
+    b1.innerText = "添加到d1前";
+    document.getElementById("t1").insertBefore(b1, document.getElementById("d1")); // 将b1节点添加到t1节点内的d1节点前
+  </script>
+
+
+  <!-- 替换节点 -->
+  <div id="t2">
+    <div>被替换的节点</div>
+  </div>
+
+  <script type="text/javascript">
+    var d2 = document.createElement("div");
+    d2.style.color = "green";
+    d2.innerText = "被我替换了";
+    document.getElementById("t2").replaceChild(d2, document.querySelector(
+      "#t2 > div:first-child")); // 第一个参数是要替换的节点，第二个参数是被替换的节点
+  </script>
+
+
+  <!-- 删除节点 -->
+  <div id="t3">
+    <div>下边的兄弟被删除了</div>
+    <div>我要被删除了</div>
+  </div>
+
+  <script type="text/javascript">
+    document.getElementById("t3").removeChild(document.querySelector("#t3 > div:nth-child(2)"));
+  </script>
+
+
+  <!-- 绑定事件 -->
+  <div id="t4" style="color: red;">点我</div>
+
+  <script type="text/javascript">
+    document.getElementById("t4").addEventListener('click', (e) => {
+      alert("点击事件");
+    })
+  </script>
+
+
+  <!-- 访问子节点 -->
+  <div id="t5" style="color: grey;">
+    <div>1</div>
+    <div>2</div>
+  </div>
+
+  <script type="text/javascript">
+    console.log(document.getElementById("t5").childNodes); // 获取所有子节点 // 注意每个换行也会有一个#text文本节点
+    console.log(document.getElementById("t5").childElementCount); // 获取子节点数量
+    console.log(document.getElementById("t5").firstChild); // 获取第一个子节点，注意也会匹配#text
+    console.log(document.getElementById("t5").firstElementChild); // 获取第一个子节点
+    console.log(document.getElementById("t5").lastChild); // 获取最后一个子节点，注意也会匹配#text
+    console.log(document.getElementById("t5").lastElementChild); // 获取最后一个子节点
+  </script>
+
+
+  <!-- 访问父节点 -->
+  <div style="color: rgb(0, 255, 55);">
+    <div id="t6">1</div>
+  </div>
+
+  <script type="text/javascript">
+    console.log(document.getElementById("t6").parentNode);
+  </script>
+
+
+  <!-- 访问兄弟节点 -->
+  <div style="color: brown;">
+    <div>1</div>
+    <div id="t7">2</div>
+    <div>3</div>
+  </div>
+
+  <script type="text/javascript">
+    console.log(document.getElementById("t7").previousSibling); // 注意也会匹配#text
+    console.log(document.getElementById("t7").previousElementSibling); // 不匹配文本节点、注释节点
+    console.log(document.getElementById("t7").nextSibling); // 注意也会匹配#text
+    console.log(document.getElementById("t7").nextElementSibling); // 不匹配文本节点、注释节点
+  </script>
+
+</body>
+
+</html>
