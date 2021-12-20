@@ -13,7 +13,6 @@ function checkForm() {
         return false;
     } else {
         trip("name_trip", "OK!!");
-
     }
 
     // 密码长度大于6 和确认必须一致 
@@ -31,9 +30,9 @@ function checkForm() {
     var surePass = surePassword.value;
     if (userPass != surePass) {
         trip("surePassword_trip", "两次密码不一致!!");
-        console.log(userPass,surePass)
+        console.log(userPass, surePass)
         return false;
-    }else {
+    } else {
         trip("surePassword_trip", "OK!!");
     }
 
@@ -51,15 +50,18 @@ function checkForm() {
 
 //提交
 function submitT() {
-    if(checkForm())
-    alert("注册成功！");
+    if (checkForm()) {
+        alert("注册成功！");
+    }
+    else {
+    }
 }
 
 //重置事件
-function myFunctionReset(){
+function myFunctionReset() {
     console.log("已重置");
     trip("name_trip", "");
     trip("password_trip", "");
-    trip("surePassword_trip","");
+    trip("surePassword_trip", "");
     trip("emil_trip", "");
 }
