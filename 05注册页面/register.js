@@ -26,11 +26,10 @@ function checkForm() {
     }
 
     //获取确认密码框的值 var
-    var surePassword = document.getElementById("surePassword");
-    var surePass = surePassword.value;
-    if (userPass != surePass) {
+    var surePassword = document.getElementById("surePassword").value;
+    if (userPass !== surePassword) {
         trip("surePassword_trip", "两次密码不一致!!");
-        console.log(userPass, surePass)
+        console.log(userPass, surePassword)
         return false;
     } else {
         trip("surePassword_trip", "OK!!");
@@ -52,6 +51,7 @@ function checkForm() {
 function submitT() {
     if (checkForm()) {
         alert("注册成功！");
+        window.open('./login.html', '_top');
     }
     else {
     }
