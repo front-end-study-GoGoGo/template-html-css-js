@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,user-scalable=no,minimal-ui">
+  <title>原生js实现模拟地球环绕太阳公转特效动画</title>
+  <meta name="keywords" content="原生js,模拟,地球环绕,太阳,公转,特效动画" />
+  <meta name="description" content="原生js实现模拟地球环绕太阳公转特效动画代码下载。" />
+  <meta name="author" content="js代码(www.jsdaima.com)" />
+  <meta name="copyright" content="js代码(www.jsdaima.com)" />
+  <script type="text/javascript" src="/static/js/protect.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <!-- It's kinda heavy on the browser, sorry about that -->
+
+  <div id="canvasContainer">
+    <div id="filterContainer">
+      <canvas id="mainstage"></canvas>
+    </div>
+  </div>
+  <svg id="weirdFilter">
+    <filter id="svgFilter">
+      <feTurbulence id="turbulence" type="turbulence" baseFrequency="0.05" numOctaves="15" />
+      <feDisplacementMap id="displacement" in="SourceGraphic" scale="25" />
+    </filter>
+    <filter id="skyFilter">
+      <feTurbulence id="turbulence1" type="turbulence" baseFrequency="0.009" numOctaves="15" />
+      <feDisplacementMap id="displacement1" in="SourceGraphic" scale="200" />
+    </filter>
+    <filter id="earthFilter">
+      <feTurbulence id="turbulence2" type="fractalNoise" baseFrequency="0.2" numOctaves="50" />
+      <feTurbulence id="turbulence1" type="turbulence" baseFrequency="0.05" numOctaves="5" />
+      <feColorMatrix type="matrix" values="1     1     0     0     0
+		  1     1     1     0     0
+		  0     0     1     0     0
+		  0     0     0     1     0 " />
+    </filter>
+  </svg>
+
+  <div id="earthGravity">
+    <div id="earth">
+      <div id="earthFilterContainer"></div>
+    </div>
+  </div>
+  <div id="earthOrbit">
+    <svg height="120" width="700">
+      <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="rgba(255,255,255,0)" />
+        <stop offset="100%" stop-color="rgba(255,255,255,0.3)" />
+      </linearGradient>
+      <ellipse cx="350" cy="60" rx="350" ry="60" fill="none" stroke="url(#gradient)" stroke-width="1" />
+    </svg>
+  </div>
+
+  <script type="text/javascript" src="index.js"></script>
+
+</body>
+
+</html>
