@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>原生Promise使用</title>
+  <style>
+    .box {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 50vw;
+      height: 50vh;
+      margin: auto;
+      border: 2px solid yellowgreen;
+    }
+
+    .box h2 {
+      width: 100%;
+      height: 50px;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .box button {
+      height: 30px;
+      text-align: center
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <h2>原生Promise使用</h2>
+    <button id='btn'>点击抽奖</button>
+  </div>
+
+  <script>
+    /**
+     * 给button写一个抽奖功能，点击按钮等待2s，随机生成一个1-100的数字，1-60为中奖，61-100位再接再厉，
+     * 并输出该数字，使用Promise。
+     */
+
+    // 随机生成[n,m]之间的整数
+    const getRandomNumber = (n, m) => {
+
+      return Math.floor(Math.random() * m + n);
+    }
+
+    const btn = document.querySelector('#btn');
+    btn.addEventListener('click', () => {
+
+      // 定义一个抽奖Promise对象 进行异步操作
+      const getAward = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          let temp = getRandomNumber(1, 100);
+          if (temp <= 60) {
+            resolve(temp);
+          } else {
+            reject(temp);
+          }
+        }, 2000)
+      });
+
+      console.log(getAward);
+
+      getAward.then(
+        (value) => {
+          alert('恭喜中奖，获得敬业福一枚!' + '你中奖数字是' + value);
+        },
+        (reason) => {
+          alert('哎哟，大奖与你插肩而过，再接再厉哦~' + '你的未中奖数字是' + reason);
+        }
+      )
+    })
+  </script>
+</body>
+
+</html>
