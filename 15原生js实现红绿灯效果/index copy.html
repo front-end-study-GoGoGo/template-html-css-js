@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>网页里的红绿灯_星星糖老师</title>
+  </head>
+  <body>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      .main {
+        width: 400px;
+        height: 100%;
+        margin: 0 auto;
+      }
+      .town {
+        width: 400px;
+        height: 400px;
+        background: #c3c3c3;
+        position: relative;
+      }
+      .town > div {
+        position: absolute;
+      }
+      .house {
+        width: 148px;
+        height: 148px;
+        border: #ffdd79 1px solid;
+        background: #799289;
+      }
+      #houseNW {
+        left: 0px;
+        top: 0px;
+      }
+      #houseNE {
+        right: 0px;
+        top: 0px;
+      }
+      #houseSW {
+        left: 0px;
+        bottom: 0px;
+      }
+      #houseSE {
+        right: 0px;
+        bottom: 0px;
+      }
+      #roadLineNS {
+        width: 2px;
+        height: 400px;
+        border-left: #ffdd79 2px dashed;
+        left: 199px;
+        top: 0px;
+        z-index: 1;
+      }
+      #roadLineEW {
+        width: 400px;
+        height: 2px;
+        border-top: #ffdd79 2px dashed;
+        left: 0px;
+        top: 199px;
+        z-index: 2;
+      }
+      #cross {
+        width: 100px;
+        height: 100px;
+        left: 150px;
+        top: 150px;
+        background: #c3c3c3;
+        z-index: 3;
+      }
+      .lights {
+        width: 48px;
+        height: 20px;
+        border: #fff 1px solid;
+        border-bottom: #ffdd79 3px solid;
+        background: #333;
+        z-index: 4;
+      }
+      #lightN {
+        left: 174px;
+        top: 128px;
+      }
+      #lightS {
+        left: 174px;
+        bottom: 128px;
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        transform: rotate(180deg);
+      }
+      #lightW {
+        top: 189px;
+        left: 115px;
+        -webkit-transform: rotate(270deg);
+        -moz-transform: rotate(270deg);
+        -o-transform: rotate(270deg);
+        -ms-transform: rotate(270deg);
+        transform: rotate(270deg);
+      }
+      #lightE {
+        bottom: 189px;
+        right: 115px;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+      }
+      .lights > div {
+        width: 10px;
+        height: 10px;
+        margin: 5px 3px;
+        border-radius: 50%;
+        float: left;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+      }
+      .greenON {
+        background: rgb(0, 255, 0);
+      }
+      .yellowON {
+        background: rgb(255, 255, 0);
+      }
+      .redON {
+        background: rgb(255, 0, 0);
+      }
+      .greenOFF {
+        background: rgb(0, 127, 0);
+      }
+      .yellowOFF {
+        background: rgb(127, 127, 0);
+      }
+      .redOFF {
+        background: rgb(127, 0, 0);
+      }
+      .bt {
+        margin-top: 10px;
+        padding: 0px 30px;
+      }
+    </style>
+
+    <div id="main" class="main">
+      <div id="town" class="town">
+        <div id="houseNW" class="house"></div>
+        <div id="houseNE" class="house"></div>
+        <div id="houseSW" class="house"></div>
+        <div id="houseSE" class="house"></div>
+        <div id="roadLineNS"></div>
+        <div id="roadLineEW"></div>
+        <div id="cross"></div>
+        <div id="lightN" class="lights">
+          <div class="greenON"></div>
+          <div class="yellowON"></div>
+          <div class="redON"></div>
+        </div>
+        <div id="lightS" class="lights">
+          <div class="greenON"></div>
+          <div class="yellowON"></div>
+          <div class="redON"></div>
+        </div>
+        <div id="lightW" class="lights">
+          <div class="greenON"></div>
+          <div class="yellowON"></div>
+          <div class="redON"></div>
+        </div>
+        <div id="lightE" class="lights">
+          <div class="greenON"></div>
+          <div class="yellowON"></div>
+          <div class="redON"></div>
+        </div>
+      </div>
+      <div class="bt">
+        绿灯时长:<input id="times" value="4" type="text" />秒<br />
+        <button onclick="traffic.start()">开 始</button>
+        <button onclick="traffic.stop()">结 束</button>
+      </div>
+    </div>
+
+    <script>
+      var green = 0,
+        yellow = 1,
+        red = 2
+      var a, b, t //t用来记录用户输入的绿灯时长设定
+      var traffic = {} //把路口红绿灯这件事设定为一个对象，所有的操作都基于名为“traffic”的对象，它好比是路口的灯控箱，有开关，有电还能人为的设定等等
+      traffic.x = {} //X相当于连接东西方向的线路，控制着左右两个灯，y同理控制着南北方向。上北下南
+      //把每个灯组的红黄绿都加到这个对象下面，左右两个绿灯同时控制
+      traffic.x[green] = []
+      traffic.x[green].push(document.getElementById('lightW').children[green])
+      traffic.x[green].push(document.getElementById('lightE').children[green])
+      traffic.x[yellow] = []
+      traffic.x[yellow].push(document.getElementById('lightW').children[yellow])
+      traffic.x[yellow].push(document.getElementById('lightE').children[yellow])
+      traffic.x[red] = []
+      traffic.x[red].push(document.getElementById('lightW').children[red])
+      traffic.x[red].push(document.getElementById('lightE').children[red])
+      //y控制南北方向的灯
+      traffic.y = {}
+      traffic.y[green] = []
+      traffic.y[green].push(document.getElementById('lightN').children[green])
+      traffic.y[green].push(document.getElementById('lightS').children[green])
+      traffic.y[yellow] = []
+      traffic.y[yellow].push(document.getElementById('lightN').children[yellow])
+      traffic.y[yellow].push(document.getElementById('lightS').children[yellow])
+      traffic.y[red] = []
+      traffic.y[red].push(document.getElementById('lightN').children[red])
+      traffic.y[red].push(document.getElementById('lightS').children[red])
+
+      //灯连接上了，下面开始加入方法，也就是控制灯的开关
+      traffic.pass = function (e) {
+        //这里设定通行方向的灯，e参数为要控制的方向，东西是x，南北是Y
+        if (e === this.x) {
+          //分开控制，一个开另一个方向就是关
+          this.setpass(this.x)
+          this.setbreak(this.y) //这里之前设定反了
+        } else {
+          this.setpass(this.y)
+          this.setbreak(this.x)
+        }
+      }
+      traffic.setpass = function (e) {
+        //开灯,绿灯亮，黄灯红灯灭，通行
+        e[green][0].className = 'greenON'
+        e[green][1].className = 'greenON'
+        e[yellow][0].className = 'yellowOFF'
+        e[yellow][1].className = 'yellowOFF'
+        e[red][0].className = 'redOFF'
+        e[red][1].className = 'redOFF'
+      }
+      traffic.setbreak = function (e) {
+        //关灯，绿灯黄灯灭，红灯亮，禁行
+        e[green][0].className = 'greenOFF'
+        e[green][1].className = 'greenOFF'
+        e[yellow][0].className = 'yellowOFF'
+        e[yellow][1].className = 'yellowOFF'
+        e[red][0].className = 'redON'
+        e[red][1].className = 'redON'
+      }
+
+      /*设定一条完整的亮灯流程
+    最简单的模式就是：绿灯-闪绿灯-黄灯-红灯
+    所以按照上面方法设定定时器就可以了
+    setTimeout（方法，时间/单位毫秒）
+    */
+      traffic.greenTime = function () {
+        //绿灯时间
+        traffic.timer = window.setTimeout(traffic.greenFlashON, t * 1000) //t为用户设定的绿灯时间，这里注意settimeout单位是毫秒
+      }
+      traffic.greenFlashON = function () {
+        //时间到了绿灯闪一下，这时候先灭灯
+        //等下再写灯的开关等等
+        //记得刚才的a为通行方向，这里暂时关一下绿灯制造闪烁
+        a[green][0].className = 'greenOFF'
+        a[green][1].className = 'greenOFF'
+        traffic.timer = window.setTimeout(traffic.greenFlashOFF, 700) //闪烁绿灯 绿灯灭0.7秒
+      }
+      traffic.greenFlashOFF = function () {
+        //灭完接着打开绿灯
+        a[green][0].className = 'greenON'
+        a[green][1].className = 'greenON'
+        traffic.timer = window.setTimeout(traffic.yellowTime, 1300) //闪烁完以后再亮1.3秒
+      }
+      traffic.yellowTime = function () {
+        //绿灯亮完最后一段时间后就是黄灯，这时候红绿都是灭的
+        a[yellow][0].className = 'yellowON'
+        a[yellow][1].className = 'yellowON'
+        a[green][0].className = 'greenOFF'
+        a[green][1].className = 'greenOFF'
+        traffic.timer = window.setTimeout(traffic.changeLight, 1000) //最后黄灯1秒
+      }
+      traffic.changeLight = function () {
+        //黄灯完了以后就切换方向
+        //判断a是a哪个方向，然后交换一下
+        if (a === traffic.x) {
+          a = traffic.y
+          b = traffic.x
+        } else {
+          a = traffic.x
+          b = traffic.y //其实b一直没用到，可以去除掉
+        }
+        traffic.pass(a)
+        traffic.greenTime() //切换完方向又开始新一轮亮灯循环
+      }
+      //先给两个按钮的单击事件写好方法
+      traffic.start = function () {
+        //单击开始
+        this.stop() //开始前先停止一下，防止用户多次单击开始按钮，重复单击也会先清除之前状态，重新开始
+        t = parseInt(document.getElementById('times').value) //获取文本框输入的时间，一定要转化为整数，用户可能输入任何内容，不转导致t可能为无效的参数
+        //判断一下得到的t是不是NaN，是不是可用
+        if (isNaN(t)) {
+          t = 4
+        }
+        //为了更好的体验，时间约束在2-10秒之间
+        if (t < 2) {
+          t = 2
+        }
+        if (t > 10) {
+          t = 10
+        }
+        //将t值填回文本框
+        document.getElementById('times').value = t
+        //因为用到了定时器，使用中一些变量作为参数要注意范围，在js所有异步操作中都要注意
+        //这里要用到之前声明的a b两个变量来指向当前通行方向和禁行方向
+        a = this.y
+        b = this.x
+        this.pass(a)
+        //初始化完毕开始切入亮灯流程
+        this.greenTime()
+      }
+      traffic.stop = function () {
+        //单击结束,结束的时候一定要清除定时器
+        if (this.hasOwnProperty('timer')) {
+          window.clearTimeout(this.timer)
+          delete this.timer
+        }
+        this.pass(this.y) //设定为南北通行，然后关闭所有灯
+        this.y[green][0].className = 'greenOFF'
+        this.y[green][1].className = 'greenOFF'
+        this.x[red][0].className = 'redOFF'
+        this.x[red][1].className = 'redOFF'
+        //四个方向灯都是灭的，不工作中
+      }
+      //网页加载完首先执行stop方法
+      traffic.stop()
+      console.log('星星糖老师')
+    </script>
+  </body>
+</html>

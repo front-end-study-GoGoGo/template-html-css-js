@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>简易红绿灯切换</title>
+  </head>
+  <body>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      ul {
+        list-style: none;
+        padding: 0px;
+        margin: 0px;
+      }
+      .main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 100vw;
+        height: 100vh;
+      }
+      .main h2:nth-of-type(1),
+      .main h4:nth-of-type(1) {
+        height: 36px;
+        line-height: 36px;
+        margin-top: 50px;
+      }
+      .main h4:nth-of-type(1) {
+        margin-top: 0px;
+      }
+      .component-traffic-light {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      .traffic-light {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        width: 100px;
+        height: 300px;
+        border-radius: 5px;
+        border: 1px solid black;
+        background-color: rgb(118, 119, 119);
+      }
+      .default-color {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 2px solid black;
+        background-color: rgb(82, 85, 85);
+      }
+      .green {
+        background-color: green;
+        color: green;
+        font-size: 36px;
+      }
+      .yellow {
+        background-color: yellow;
+        color: yellow;
+        font-size: 36px;
+      }
+      .red {
+        background-color: red;
+        color: red;
+        font-size: 36px;
+      }
+      .component-traffic-light .count {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+        border: 2px solid black;
+        background-color: white;
+        margin-left: 50px;
+      }
+    </style>
+    <div id="main" class="main">
+      <h2>简易红绿灯切换</h2>
+      <h4>绿灯亮30s，然后黄灯亮3s，然后红灯亮30s，以此循环</h4>
+      <div class="component-traffic-light">
+        <div class="traffic-light">
+          <ul id="green" class="default-color"></ul>
+          <ul id="yellow" class="default-color"></ul>
+          <ul id="red" class="default-color"></ul>
+        </div>
+        <div id="countId" class="count green"><p>11</p></div>
+      </div>
+    </div>
+
+    <script>
+      // 绿灯亮
+      const runGreen = () => {
+        console.log('runGreen')
+        let green = document.getElementById('green')
+        let yellow = document.getElementById('yellow')
+        let red = document.getElementById('red')
+        let countId = document.getElementById('countId')
+        console.log(green)
+        green.classList.add('green')
+        yellow.classList.remove('yellow')
+        red.classList.remove('red')
+        countId.classList.add('green')
+        countId.classList.remove('yellow')
+        countId.classList.remove('red')
+      }
+      // 黄灯亮
+      const runYellow = () => {
+        console.log('runYellow')
+        let green = document.getElementById('green')
+        let yellow = document.getElementById('yellow')
+        let red = document.getElementById('red')
+        let countId = document.getElementById('countId')
+        green.classList.remove('green')
+        yellow.classList.add('yellow')
+        red.classList.remove('red')
+        countId.classList.remove('green')
+        countId.classList.add('yellow')
+        countId.classList.remove('red')
+      }
+      // 红灯亮
+      const runRed = () => {
+        console.log('runRed')
+        let green = document.getElementById('green')
+        let yellow = document.getElementById('yellow')
+        let red = document.getElementById('red')
+        let countId = document.getElementById('countId')
+        green.classList.remove('green')
+        yellow.classList.remove('yellow')
+        red.classList.add('red')
+        countId.classList.remove('green')
+        countId.classList.remove('yellow')
+        countId.classList.add('red')
+      }
+
+      // 运行红绿灯 当前写的是3秒切换一次
+      const run = () => {
+        console.log('进入了run')
+        runGreen()
+        setTimeout(runYellow, 3000)
+        setTimeout(runRed, 6000)
+        setTimeout(run, 9000)
+      }
+      run()
+    </script>
+  </body>
+</html>
