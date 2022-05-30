@@ -88,7 +88,7 @@
     </style>
     <div id="main" class="main">
       <h2>简易红绿灯切换</h2>
-      <h4>绿灯亮30s，然后黄灯亮3s，然后红灯亮30s，以此循环</h4>
+      <h4 id="secondTitle">绿灯亮30s，然后黄灯亮3s，然后红灯亮30s，以此循环</h4>
       <div class="component-traffic-light">
         <div class="traffic-light">
           <ul id="green" class="default-color"></ul>
@@ -121,6 +121,7 @@
           time -= 1000
         }, 1000)
       }
+      
       // 黄灯亮
       const runYellow = (time = 2000) => {
         // console.log('runYellow======')
@@ -141,6 +142,7 @@
           time -= 1000
         }, 1000)
       }
+
       // 红灯亮
       const runRed = (time = 2000) => {
         // console.log('runRed')
@@ -183,7 +185,13 @@
         })
       }
 
-      runRGLight(10, 3, 10)
+      const run = (greenTime, yellowTime, redTime) => {
+        let secondTitle = document.getElementById('secondTitle')
+        secondTitle.innerText = `绿灯亮${greenTime}s，然后黄灯亮${yellowTime}s，然后红灯亮${redTime}s，以此循环`
+        runRGLight(greenTime, yellowTime, redTime)
+      }
+
+      run(10, 3, 10)
     </script>
   </body>
 </html>
