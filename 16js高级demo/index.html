@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .flexBox{
+        display: flex;
+        width: 80%;
+        height: 200px;
+      }
+      .flexBox .item1{
+        width: 300px;
+        background-color: aqua;
+      }
+      .flexBox .item2{
+        flex:1;
+        background-color: rgb(38, 230, 118);
+      }
+      .flexBox .item3{
+        flex: 1;
+        background-color: rgb(221, 235, 95);
+      }
+    </style>
+  </head>
+  <body>
+    <h3>打开控制台看内容</h3>
+    <div class="flexBox">
+      <div class="item1"></div>
+      <div class="item2"></div>
+      <div class="item3"></div>
+    </div>
+    <script>
+      // // 对象的this
+      // var obj = { age: 12 },num = 2
+      // function fun(obj, num) {
+      //   obj = null
+      //   // obj.age=13
+      //   // obj = {age:13}
+      //   num = 3
+      // }
+      // fun(obj)
+      // let obj2 = obj
+      // obj = null
+      // // console.log(obj2.age, '---', num)
+      // // alert(obj2.age+'---'+num)
+
+      // // 原型
+      // var obj3= {}
+      // var obj4 = new Object();
+      // console.log(obj3,obj3.prototype,Date.prototype,obj3.constructor);
+      // console.log(Date.prototype.constructor.prototype===Date.prototype);
+      // console.log(obj4,obj4.prototype,obj4.constructor,obj4.__proto__);
+      // console.log('----',Object.prototype);
+      console.log(a)
+      {
+        var a = 1
+      }
+      console.log(a)
+    </script>
+  </body>
+</html>

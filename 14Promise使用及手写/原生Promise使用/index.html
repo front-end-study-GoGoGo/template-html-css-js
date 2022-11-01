@@ -75,6 +75,24 @@
           }
         )
       })
+
+      let l = 'aaascessaa'
+      let max = '',
+        maxNum = 0,
+        flagNum = 0
+      for (let i = 0; i < l.length; i++) {
+        flagNum = 0
+        for (let j = 0; j < l.length; j++) {
+          if (l[i] === l[j]) {
+            flagNum++
+          }
+        }
+        if (flagNum >= maxNum) {
+          max = l[i]
+          maxNum = flagNum
+        }
+      }
+      console.log(max, maxNum)
     </script>
   </body>
 </html>

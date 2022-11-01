@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>h5真机调试案例</title>
+    <style>
+      .list-box {
+        width: 100%;
+        height: 500px;
+        text-align: center;
+        overflow-y: auto;
+        border: 1px solid yellowgreen;
+      }
+      .item {
+        width: 90%;
+        height: 90px;
+        margin: 10px 0px;
+        border: 1px solid rgb(124, 169, 168);
+        box-shadow: 1px 2px;
+        border-radius: 4px;
+      }
+
+      .item img {
+        max-width: 30%;
+        width: auto;
+        height: 100%;
+        vertical-align: middle;
+      }
+      .item div {
+        display: inline-block;
+        width: 68%;
+        height: 100%;
+        text-align: center;
+        line-height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="list-box">
+      <div class="item">
+        <img src="./lufei.jpeg" alt="" />
+        <div>所有人都知道,自由并不是放纵,那是火一般的梦想</div>
+      </div>
+      <div class="item">
+        <img src="./lufei.jpeg" alt="" />
+        <div>所有人都知道,自由并不是放纵,那是火一般的梦想</div>
+      </div>
+      <div class="item">
+        <img src="./lufei.jpeg" alt="" />
+        <div>所有人都知道,自由并不是放纵,那是火一般的梦想</div>
+      </div>
+      <div class="item">
+        <img src="./lufei.jpeg" alt="" />
+        <div>所有人都知道,自由并不是放纵,那是火一般的梦想</div>
+      </div>
+      <div class="item">
+        <img src="./lufei.jpeg" alt="" />
+        <div>所有人都知道,自由并不是放纵,那是火一般的梦想</div>
+      </div>
+      <div class="item">
+        <img src="./lufei.jpeg" alt="" />
+        <div>所有人都知道,自由并不是放纵,那是火一般的梦想</div>
+      </div>
+      <div class="item">
+        <img src="./lufei.jpeg" alt="" />
+        <div>所有人都知道,自由并不是放纵,那是火一般的梦想</div>
+      </div>
+    </div>
+    <button id="btn1">1111</button>
+    <button id="btn2">2222</button>
+  </body>
+  <script>
+    function showBtn1(){
+      console.log(1111);
+    }
+    const showBtn2=()=>{
+      console.log(2222);
+    }
+    let btn1 = document.getElementById('btn1')
+    btn1.onclick=showBtn1;
+    let btn2 = document.getElementById('btn2')
+    btn2.onclick=showBtn2;
+  </script>
+</html>

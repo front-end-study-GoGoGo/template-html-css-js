@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>滚动条案例</title>
+    <style>
+      #scroll_container {
+        height: 500px;
+        width: 500px;
+        overflow-y: scroll;
+        padding: 50px;
+        box-sizing: border-box;
+      }
+      .scroll_item {
+        height: 200px;
+        width: 500px;
+        margin-top: 20px;
+        background-color: aquamarine;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="scroll_container">
+      <div id="scroll_container">
+        <div id="item1" class="scroll_item">
+          <span>1</span>
+        </div>
+        <div id="item2" class="scroll_item">
+          <span>2</span>
+        </div>
+        <div id="item3" class="scroll_item">
+          <span>3</span>
+        </div>
+        <div id="item4" class="scroll_item">
+          <span>4</span>
+        </div>
+        <div id="item5" class="scroll_item">
+          <span>5</span>
+        </div>
+      </div>
+      <button onclick="addItem()">添加一个元素</button>
+    </div>
+  </body>
+  <script>
+    let container = document.getElementById('scroll_container')
+    let index = 5
+    //添加一个元素
+    function addItem() {
+      index += 1
+      let item = `<div id="${'item' + index}" class="scroll_item">
+                        <span>${index}</span>
+                    </div>`
+      container.innerHTML += item
+      setTimeout(() => {
+        scrollToIndex()
+      })
+    }
+  </script>
+</html>
