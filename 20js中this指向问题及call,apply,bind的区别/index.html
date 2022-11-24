@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>打开控制台看内容</h3>
+    <script>
+      // 1.直接调用时，从这个this往它外层找，最靠近它的对象是window，所以它指向的就是window
+      function fun() {
+        console.log(this)
+      }
+      fun()
+      // 2.以方法的形式调用，从这里this往外层找，可以看到靠近这个this的对象是我们定义的obj对象，所以this指向的就是obj
+      const obj = {
+        name: 'obj啊',
+        sayObj: fun
+      }
+      obj.sayObj()
+      // 3.当使用new关键字调用，这个时候最靠近this的是new关键字实例化出来的对象，所以下面这两句话的this指向分别是creatPerson1对象和creatPerson2对象
+      function Person(name, age) {
+        console.log(this)
+        this.name = name
+        this.age = age
+      }
+      const creatPerson1 = new Person('Jack', 11111)
+      const creatPerson2 = new Person('Tom', 22222)
+
+      console.log('-------------------分割线-------------------')
+      // 我们在全局作用下定义一个箭头函数，外围靠近它最近的对象是window，好，那么此刻它的this直接就是window，而且后续无论在哪里调用都不会改变了。
+      const sayColor = () => console.log(this)
+      // 1.直接调用，this指向window
+      sayColor()
+      // 2.以obj_1对象里面的方法形式调用，this依然指向window
+      let obj_1 = {
+        name: 'obj_1啦啦',
+        sayColor: sayColor
+      }
+      obj_1.sayColor()
+
+      console.log('-------------------分割线-------------------')
+      var a = {
+        name: '一一',
+        age: '23',
+        sex: '女',
+        hobby: '写代码',
+        say: function (sex, hobby) {
+          console.log(this.name, this.age, sex, hobby)
+        }
+      }
+      var b = {
+        name: '二二',
+        age: '24'
+      }
+      a.say()
+      a.say.call(b, '男', '爬山')
+      a.say.apply(b, ['男', '密室逃脱'])
+      // bind可以向cally一样传参，例如:
+      a.say.bind(b, '男', 'UNO')()
+      // 但由于bind返回的仍然是一个函数，所以我们还可以在函数调用的时候再进行传参。例如：
+      a.say.bind(b)('男', 'UNO')
+    </script>
+  </body>
+</html>

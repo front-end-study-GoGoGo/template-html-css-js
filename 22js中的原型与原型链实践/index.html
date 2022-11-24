@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>打开控制台看内容</h3>
+    <script>
+      // 工厂模式实现 方法1
+      // function Person(name, age, job) {
+      //   this.name = name
+      //   this.age = age
+      //   this.job = job
+      //   this.sayName = function () {
+      //     console.log(this.name)
+      //   }
+      // }
+      // let person1 = new Person('Nicholas', 29, 'Software Engineer')
+      // let person2 = new Person('Greg', 27, 'Doctor')
+      // person1.sayName() // Nicholas
+      // person2.sayName() // Greg
+
+      // 工厂模式实现 方法2 使用原型属性
+      function Person(name, age, job) {
+        this.name = name
+        this.age = age
+        this.job = job
+      }
+      Person.prototype.sayName = function () {
+        console.log(this.name)
+      }
+      let person1 = new Person('Nicholas', 29, 'Software Engineer')
+      let person2 = new Person('Greg', 27, 'Doctor')
+      person1.sayName() // Nicholas
+      person2.sayName() // Greg
+    </script>
+  </body>
+</html>
